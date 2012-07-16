@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="63ba7390-3ae8-4b9b-9f86-ed7648b95e64" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8732//RobotService/RobotService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="ee181b1f-2f32-4fa0-870a-60c074fa8aec" SourceId="1" SourceUrl="http://localhost:8732//RobotService/RobotService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="14bdf5d8-56af-4a25-8172-24a54c1b6942" SourceId="1" SourceUrl="http://localhost:8732//RobotService/RobotService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="1f2c708a-b6fc-4594-9f1b-debe2c9da23d" SourceId="1" SourceUrl="http://localhost:8732//RobotService/RobotService/mex" />
+    <MetadataFile FileName="Slb.InversionOptimization.RobotService.xsd" MetadataType="Schema" ID="c80c5c0d-7a8f-4f69-a9cf-eae30967075d" SourceId="1" SourceUrl="http://localhost:8732//RobotService/RobotService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="274f42d4-7f7c-4a5a-b1fd-e233af7f024d" SourceId="1" SourceUrl="http://localhost:8732//RobotService/RobotService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

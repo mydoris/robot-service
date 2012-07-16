@@ -1,0 +1,4 @@
+<Modules>
+  <Module PersistentId="FF9BABE3-F66E-457B-B3F0-B6C9B773E0AA" ModuleId="RobotController" />
+  <Module PersistentId="677C1CB3-8C45-4D3A-99A9-EA6D2389D9C8" ModuleId="InversionManagerFormsApplication" />
+</Modules>
