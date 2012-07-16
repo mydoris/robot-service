@@ -2,5 +2,8 @@
 bin
 obj
 
+# Encryption file
+CredDB.CEF
+
 # mstest test results
 TestResults
