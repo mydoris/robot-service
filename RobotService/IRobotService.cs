@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -66,24 +67,41 @@ namespace Slb.InversionOptimization.RobotService
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations
-    [DataContract]
-    public class CompositeType
+    //[DataContract]
+    //public class CompositeType
+    //{
+    //    bool boolValue = true;
+    //    string stringValue = "Hello ";
+
+    //    [DataMember]
+    //    public bool BoolValue
+    //    {
+    //        get { return boolValue; }
+    //        set { boolValue = value; }
+    //    }
+
+    //    [DataMember]
+    //    public string StringValue
+    //    {
+    //        get { return stringValue; }
+    //        set { stringValue = value; }
+    //    }
+    //}
+
+
+    [MessageContract]
+    public class FileUploadMessage
     {
-        bool boolValue = true;
-        string stringValue = "Hello ";
+        [MessageHeader(MustUnderstand = true)]
+        public string SavePath;
 
-        [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
+        [MessageHeader(MustUnderstand = true)]
+        public string FileName;
 
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
+        [MessageBodyMember(Order = 1)]
+        public Stream FileData;
+
     }
+
+
 }
