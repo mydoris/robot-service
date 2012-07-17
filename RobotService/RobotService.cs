@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -18,18 +19,59 @@ namespace Slb.InversionOptimization.RobotService
             return string.Format("You entered: {0}", value);
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+
+        public void UploadFile(FileUploadMessage request)
         {
-            if (composite == null)
+            string uploadFolder = @"C:\Inversion\";
+            string savaPath = request.SavePath;
+            string dateString = DateTime.Now.ToShortDateString() + @"\";
+            string fileName = request.FileName;
+            Stream sourceStream = request.FileData;
+            FileStream targetStream = null;
+
+            if (!sourceStream.CanRead)
             {
-                throw new ArgumentNullException("composite");
+                throw new Exception("Stream cannot be read!");
             }
-            if (composite.BoolValue)
+            if (savaPath == null) savaPath = @"Default\";
+            if (!savaPath.EndsWith("\\")) savaPath += "\\";
+
+            uploadFolder = uploadFolder + savaPath + dateString;
+            if (!Directory.Exists(uploadFolder))
             {
-                composite.StringValue += "Suffix";
+                Directory.CreateDirectory(uploadFolder);
             }
-            return composite;
+
+            string filePath = Path.Combine(uploadFolder, fileName);
+            using (targetStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                //read from the input stream in 4K chunks
+                //and save to output stream
+                const int bufferLen = 4096;
+                byte[] buffer = new byte[bufferLen];
+                int count = 0;
+                while ((count = sourceStream.Read(buffer, 0, bufferLen)) > 0)
+                {
+                    targetStream.Write(buffer, 0, count);
+                }
+                targetStream.Close();
+                sourceStream.Close();
+            }
         }
+
+
+        //public CompositeType GetDataUsingDataContract(CompositeType composite)
+        //{
+        //    if (composite == null)
+        //    {
+        //        throw new ArgumentNullException("composite");
+        //    }
+        //    if (composite.BoolValue)
+        //    {
+        //        composite.StringValue += "Suffix";
+        //    }
+        //    return composite;
+        //}
 
 
         public bool InitInversion(Guid wellID, Guid inversionID, Guid ownerID)

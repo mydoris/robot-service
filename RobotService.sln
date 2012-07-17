@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InversionManagerFormsApplic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotLibary", "RobotLibary\RobotLibary.csproj", "{A9C0C154-550B-4412-A7AC-F732CB512959}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotWcfService", "RobotWcfService\RobotWcfService.csproj", "{5FF5DE28-898C-4FD1-96E9-0D69E7C4851C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,16 @@ Global
 		{A9C0C154-550B-4412-A7AC-F732CB512959}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A9C0C154-550B-4412-A7AC-F732CB512959}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A9C0C154-550B-4412-A7AC-F732CB512959}.Release|x86.ActiveCfg = Release|Any CPU
+		{5FF5DE28-898C-4FD1-96E9-0D69E7C4851C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FF5DE28-898C-4FD1-96E9-0D69E7C4851C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FF5DE28-898C-4FD1-96E9-0D69E7C4851C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5FF5DE28-898C-4FD1-96E9-0D69E7C4851C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5FF5DE28-898C-4FD1-96E9-0D69E7C4851C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5FF5DE28-898C-4FD1-96E9-0D69E7C4851C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FF5DE28-898C-4FD1-96E9-0D69E7C4851C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FF5DE28-898C-4FD1-96E9-0D69E7C4851C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5FF5DE28-898C-4FD1-96E9-0D69E7C4851C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5FF5DE28-898C-4FD1-96E9-0D69E7C4851C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

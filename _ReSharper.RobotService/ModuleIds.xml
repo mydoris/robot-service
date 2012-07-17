@@ -3,4 +3,6 @@
   <Module PersistentId="677C1CB3-8C45-4D3A-99A9-EA6D2389D9C8" ModuleId="InversionManagerFormsApplication" />
   <Module PersistentId="A9C0C154-550B-4412-A7AC-F732CB512959" ModuleId="RobotLibary" />
   <Module PersistentId="011197DA-23A9-45E5-B5F4-20F62175DEA7" ModuleId="RobotService" />
+  <Module PersistentId="5FF5DE28-898C-4FD1-96E9-0D69E7C4851C" ModuleId="RobotWcfService" />
+  <Module PersistentId="4B20996C-D374-4CD8-80ED-AC051351358B" ModuleId="WcfService1.ryrtyrty" />
 </Modules>
