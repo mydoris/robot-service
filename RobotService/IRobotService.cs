@@ -12,12 +12,7 @@ namespace Slb.InversionOptimization.RobotService
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
     public interface IRobotService : IRobot
-    {
-        [OperationContract]
-        string GetData(int value);
-
-        //[OperationContract]
-        //CompositeType GetDataUsingDataContract(CompositeType composite);      
+    { 
         
         [OperationContract(Action = "UploadFile", IsOneWay = true)]
         void UploadFile(FileUploadMessage request);

@@ -48,5 +48,7 @@ namespace Slb.InversionOptimization.RobotLibary
 
 
 
+
+        void UploadFile(global::Slb.InversionOptimization.RobotService.FileUploadMessage request);
     }
 }
