@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 
-namespace Slb.InversionOptimization.RobotLibary
+namespace Slb.InversionOptimization.RobotWcfService
 {
     public interface IRobot
     {
@@ -46,6 +43,7 @@ namespace Slb.InversionOptimization.RobotLibary
         /// <returns></returns>
         bool RetrieveInversion(Guid inversionID, string accessCode);
 
-    }
 
+        void UploadFile(FileUploadMessage request);
+    }
 }

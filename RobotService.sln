@@ -1,12 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotService", "RobotService\RobotService.csproj", "{011197DA-23A9-45E5-B5F4-20F62175DEA7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotController", "RobotApplication\RobotController.csproj", "{FF9BABE3-F66E-457B-B3F0-B6C9B773E0AA}"
-	ProjectSection(ProjectDependencies) = postProject
-		{011197DA-23A9-45E5-B5F4-20F62175DEA7} = {011197DA-23A9-45E5-B5F4-20F62175DEA7}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InversionManagerFormsApplication", "InversionManagerFormsApplication\InversionManagerFormsApplication.csproj", "{677C1CB3-8C45-4D3A-99A9-EA6D2389D9C8}"
 EndProject
@@ -24,16 +19,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{011197DA-23A9-45E5-B5F4-20F62175DEA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{011197DA-23A9-45E5-B5F4-20F62175DEA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{011197DA-23A9-45E5-B5F4-20F62175DEA7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{011197DA-23A9-45E5-B5F4-20F62175DEA7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{011197DA-23A9-45E5-B5F4-20F62175DEA7}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{011197DA-23A9-45E5-B5F4-20F62175DEA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{011197DA-23A9-45E5-B5F4-20F62175DEA7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{011197DA-23A9-45E5-B5F4-20F62175DEA7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{011197DA-23A9-45E5-B5F4-20F62175DEA7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{011197DA-23A9-45E5-B5F4-20F62175DEA7}.Release|x86.ActiveCfg = Release|Any CPU
 		{FF9BABE3-F66E-457B-B3F0-B6C9B773E0AA}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{FF9BABE3-F66E-457B-B3F0-B6C9B773E0AA}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{FF9BABE3-F66E-457B-B3F0-B6C9B773E0AA}.Debug|Mixed Platforms.Build.0 = Debug|x86

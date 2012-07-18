@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
-using Slb.InversionOptimization.RobotLibary;
 
 namespace Slb.InversionOptimization.RobotWcfService
 {
@@ -14,10 +9,6 @@ namespace Slb.InversionOptimization.RobotWcfService
     [ServiceContract]
     public interface IRobotService
     {
-
-        [OperationContract(Action = "UploadFile", IsOneWay = true)]
-        void UploadFile(FileUploadMessage request);
-
         /// <summary>
         /// Initialize inversion, send settings to Robot
         /// </summary>
@@ -60,6 +51,13 @@ namespace Slb.InversionOptimization.RobotWcfService
         /// <returns></returns>
         [OperationContract]
         bool RetrieveInversion(Guid inversionID, string accessCode);
+
+        /// <summary>
+        /// Upload 3 files to RobotService
+        /// </summary>
+        /// <param name="request"></param>
+        [OperationContract(Action = "UploadFile", IsOneWay = true)]
+        void UploadFile(FileUploadMessage request);
 
     }
 

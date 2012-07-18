@@ -10,7 +10,7 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RobotWcfService</RootNamespace>
+    <RootNamespace>Slb.InversionOptimization.RobotWcfService</RootNamespace>
     <AssemblyName>RobotWcfService</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
@@ -63,20 +63,19 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IInversion.cs" />
+    <Compile Include="Inversion.cs" />
+    <Compile Include="IRobot.cs" />
+    <Compile Include="Robot.cs" />
     <Compile Include="RobotService.svc.cs">
       <DependentUpon>RobotService.svc</DependentUpon>
     </Compile>
     <Compile Include="IRobotService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RobotLibary\RobotLibary.csproj">
-      <Project>{A9C0C154-550B-4412-A7AC-F732CB512959}</Project>
-      <Name>RobotLibary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
