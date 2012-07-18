@@ -13,36 +13,36 @@ namespace Slb.InversionOptimization.RobotWcfService
         /// <param name="settings"></param>
         /// <param name="request"> </param>
         /// <returns>inversionID</returns>
-        Guid InitInversion(FileUploadMessage request, Guid ownerID);
+        Guid InitInversion(FileUploadMessage request, Guid ownerId);
 
         /// <summary>
         /// Start an inversion
         /// </summary>
-        /// <param name="inversionID"></param>
+        /// <param name="inversionId"></param>
         /// <returns></returns>
-        bool StartInversion(Guid ownerID, Guid inversionID);
+        bool StartInversion(Guid ownerId, Guid inversionId);
 
         /// <summary>
         /// Stop  an inversion
         /// </summary>
-        /// <param name="inversionID"></param>
+        /// <param name="inversionId"></param>
         /// <returns></returns>
-        bool StopInversion(Guid ownerID, Guid inversionID);
+        bool StopInversion(Guid ownerId, Guid inversionId);
 
         /// <summary>
         /// Query and get all inversions for a well
         /// </summary>
-        /// <param name="wellID"></param>
+        /// <param name="wellId"></param>
         /// <returns>Dictionary with OwnerID, Inversion pair</returns>
-        IDictionary<Guid, IInversion> QueryInversion(Guid wellID);
+        IDictionary<Guid, IInversion> QueryInversion(Guid wellId);
 
         /// <summary>
         /// Retrieve an inversion result which includes both Input and Output files
         /// </summary>
-        /// <param name="inversionID"></param>
+        /// <param name="inversionId"></param>
         /// <param name="accessCode"></param>
         /// <returns></returns>
-        bool RetrieveInversion(Guid inversionID, string accessCode);
+        bool RetrieveInversion(Guid inversionId, string accessCode);
 
         /// <summary>
         /// Upload 3 kinds files to RobotService

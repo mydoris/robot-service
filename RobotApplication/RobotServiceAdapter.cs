@@ -11,12 +11,12 @@ namespace Slb.InversionOptimization.RobotController
 {
     public class RobotServiceAdapter : IRobotServiceAdapter
     {
-        private RobotServiceClient robotServiceClient;
+        private RobotServiceClient _robotServiceClient;
 
         public RobotServiceClient RobotServiceClient
         {
-            get { return robotServiceClient; }
-            set { robotServiceClient = value; }
+            get { return _robotServiceClient; }
+            set { _robotServiceClient = value; }
         }
 
 
@@ -29,17 +29,17 @@ namespace Slb.InversionOptimization.RobotController
             //settings.InversionID = Guid.NewGuid();
             //st.InversionID = settings.InversionID;
             
-            return robotServiceClient.InitInversion(wellID, inversionID, ownerID);
+            return _robotServiceClient.InitInversion(wellID, inversionID, ownerID);
         }
 
         public bool StartInversion(Guid ownerID, Guid inversionID)
         {
-            return robotServiceClient.StartInversion(ownerID, inversionID);
+            return _robotServiceClient.StartInversion(ownerID, inversionID);
         }
 
         public bool StopInversion(Guid ownerID, Guid inversionID)
         {
-            return robotServiceClient.StopInversion(ownerID, inversionID);
+            return _robotServiceClient.StopInversion(ownerID, inversionID);
         }
 
         public IDictionary<Guid, InversionManagerFormsApplication.IInversion> QueryInversion(Guid wellID)
@@ -49,7 +49,7 @@ namespace Slb.InversionOptimization.RobotController
 
         public bool RetrieveInversion(Guid inversionID, string accessCode)
         {
-            return robotServiceClient.RetrieveInversion(inversionID, accessCode);
+            return _robotServiceClient.RetrieveInversion(inversionID, accessCode);
         }
     }
 }

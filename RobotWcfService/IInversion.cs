@@ -4,12 +4,6 @@ namespace Slb.InversionOptimization.RobotWcfService
 {
     public interface IInversion
     {
-        Guid OwnerID { get; }
-        string AccessCode { get; set; }
-        //Settings Settings { get; set; }
-        string Name { get; set; }
-        Guid InversionID { get; set; }
-
 
         /// <summary>
         /// Check if user's accessCode matches Inversion's accessCode or not
@@ -20,7 +14,7 @@ namespace Slb.InversionOptimization.RobotWcfService
 
         void ConfigurateSetup();
 
-        void GetDataFromInterACT();
+        void GetDataFromInterAct();
 
 
 

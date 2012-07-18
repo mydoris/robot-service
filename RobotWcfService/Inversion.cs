@@ -4,54 +4,41 @@ namespace Slb.InversionOptimization.RobotWcfService
 {
     public class Inversion : IInversion
     {
-        private string name;
-        private Guid inversionID;
-        private Guid ownerID;
-        private string accessCode;
-        private Settings settings;
+        private string _accessCode;
 
-
+        private string _name;
         public string Name
         {
-            get { return name; }
-            set { name = value; }
+            get { return _name; } 
         }
 
-        public Guid InversionID
+        private Guid _ownerId;
+        public Guid OwnerId
         {
-            get { return inversionID; }
-            set { inversionID = value; }
-        }
-        
-
-        public Guid OwnerID
-        {
-            get { return ownerID; }
-            set { ownerID = value; }
+            get { return _ownerId; }
         }
 
-        public string AccessCode
-        {
-            get { return accessCode; }
-            set { accessCode = value; }
-        }
-
+        private Settings _settings;
         public Settings Settings
         {
-            get { return settings; }
-            set { settings = value; }
+            get { return _settings; }
+            set { _settings = value; }
         }
 
-        public Inversion(Guid ownerID, string accessCode, Settings settings)
+        public Inversion()
         {
-            this.ownerID = ownerID;
-            this.accessCode = accessCode;
-            this.settings = settings;
+        }
+
+        public Inversion(Guid ownerId, string accessCode, Settings settings)
+        {
+            this._ownerId = ownerId;
+            this._accessCode = accessCode;
+            this._settings = settings;
         }
 
         public bool CheckAccessCode(string accessCode)
         {
-            if (this.accessCode == accessCode)
+            if (this._accessCode == accessCode)
                 return true;
             else
                 return false;
@@ -64,7 +51,7 @@ namespace Slb.InversionOptimization.RobotWcfService
             throw new NotImplementedException();
         }
 
-        public void GetDataFromInterACT()
+        public void GetDataFromInterAct()
         {
             throw new NotImplementedException();
         }

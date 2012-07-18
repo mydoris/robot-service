@@ -13,29 +13,29 @@ namespace Slb.InversionOptimization.RobotWcfService
             robot = new Robot();
         }
 
-        public Guid InitInversion(FileUploadMessage request, Guid ownerID)
+        public Guid InitInversion(FileUploadMessage request, Guid ownerId)
         {
-            return robot.InitInversion(request, ownerID);
+            return robot.InitInversion(request, ownerId);
         }
 
-        public bool StartInversion(Guid ownerID, Guid inversionID)
+        public bool StartInversion(Guid ownerId, Guid inversionId)
         {
-            return robot.StartInversion(ownerID, inversionID);
+            return robot.StartInversion(ownerId, inversionId);
         }
 
-        public bool StopInversion(Guid ownerID, Guid inversionID)
+        public bool StopInversion(Guid ownerId, Guid inversionId)
         {
-            return robot.StopInversion(ownerID, inversionID);
+            return robot.StopInversion(ownerId, inversionId);
         }
 
-        public IDictionary<Guid, IInversion> QueryInversion(Guid wellID)
+        public IDictionary<Guid, IInversion> QueryInversion(Guid wellId)
         {
-            return robot.QueryInversion(wellID);
+            return robot.QueryInversion(wellId);
         }
 
-        public bool RetrieveInversion(Guid inversionID, string accessCode)
+        public bool RetrieveInversion(Guid inversionId, string accessCode)
         {
-            return robot.RetrieveInversion(inversionID, accessCode);
+            return robot.RetrieveInversion(inversionId, accessCode);
         }
 
         public void UploadFile(FileUploadMessage request)

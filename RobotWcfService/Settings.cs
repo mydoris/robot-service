@@ -4,12 +4,18 @@ namespace Slb.InversionOptimization.RobotWcfService
 {
     public class Settings
     {
-        Guid inversionID;
+        private Guid _inversionId;
+        private byte[] _bha;
+        private byte[] _setup;
+        private byte[] _connections;
 
-        public Guid InversionID
-        {
-            get { return inversionID; }
-            set { inversionID = value; }
-        }
+
+
+
+
+
+
+
+
     }
 }

@@ -5,48 +5,42 @@ namespace Slb.InversionOptimization.RobotWcfService
 {
     public class Robot : IRobot
     {
-        IInversion inversion;
-
-        public IInversion Inversion
-        {
-            get { return inversion; }
-            set { inversion = value; }
-        }
+        public IInversion Inversion { get; set; }
 
         //owner inversion Map
-        IDictionary<Guid, IInversion> ownerInversionLookup = new Dictionary<Guid, IInversion>();
+        IDictionary<Guid, IInversion> _ownerInversionLookup = new Dictionary<Guid, IInversion>();
         //accessCode inversion Map
-        IDictionary<string, IInversion> accessInversionLookup = new Dictionary<string, IInversion>();
+        IDictionary<string, IInversion> _accessInversionLookup = new Dictionary<string, IInversion>();
         //inversionID userID Map
-        IDictionary<Guid, Guid> inversionUserLookup = new Dictionary<Guid, Guid>();
+        IDictionary<Guid, Guid> _inversionUserLookup = new Dictionary<Guid, Guid>();
 
-        private List<byte[]> GetFileData(Guid inversionID, string accessCode)
+        private List<byte[]> GetFileData(Guid inversionId, string accessCode)
         {
             throw new NotImplementedException();
         }
 
 
-        public Guid InitInversion(FileUploadMessage request, Guid ownerID)
+        public Guid InitInversion(FileUploadMessage request, Guid ownerId)
         {
             throw new NotImplementedException();
         }
 
-        public bool StartInversion(Guid ownerID, Guid inversionID)
+        public bool StartInversion(Guid ownerId, Guid inversionId)
         {
             throw new NotImplementedException();
         }
 
-        public bool StopInversion(Guid ownerID, Guid inversionID)
+        public bool StopInversion(Guid ownerId, Guid inversionId)
         {
             throw new NotImplementedException();
         }
 
-        public IDictionary<Guid, IInversion> QueryInversion(Guid wellID)
+        public IDictionary<Guid, IInversion> QueryInversion(Guid wellId)
         {
             throw new NotImplementedException();
         }
 
-        public bool RetrieveInversion(Guid inversionID, string accessCode)
+        public bool RetrieveInversion(Guid inversionId, string accessCode)
         {
             throw new NotImplementedException();
         }
