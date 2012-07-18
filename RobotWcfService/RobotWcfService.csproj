@@ -63,6 +63,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileUploadMessage.cs" />
     <Compile Include="IInversion.cs" />
     <Compile Include="Inversion.cs" />
     <Compile Include="IRobot.cs" />

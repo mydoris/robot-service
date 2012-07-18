@@ -11,8 +11,9 @@ namespace Slb.InversionOptimization.RobotWcfService
         /// <param name="wellID"></param>
         /// <param name="OwnerID"></param>
         /// <param name="settings"></param>
-        /// <returns></returns>
-        bool InitInversion(Guid wellID, Guid inversionID, Guid ownerID);
+        /// <param name="request"> </param>
+        /// <returns>inversionID</returns>
+        Guid InitInversion(FileUploadMessage request, Guid ownerID);
 
         /// <summary>
         /// Start an inversion
@@ -43,7 +44,11 @@ namespace Slb.InversionOptimization.RobotWcfService
         /// <returns></returns>
         bool RetrieveInversion(Guid inversionID, string accessCode);
 
-
+        /// <summary>
+        /// Upload 3 kinds files to RobotService
+        /// </summary>
+        /// <param name="request"></param>
         void UploadFile(FileUploadMessage request);
+
     }
 }

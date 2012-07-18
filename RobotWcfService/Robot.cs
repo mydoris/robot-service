@@ -25,10 +25,10 @@ namespace Slb.InversionOptimization.RobotWcfService
             throw new NotImplementedException();
         }
 
-        public bool InitInversion(Guid wellID, Guid inversionID, Guid ownerID)
+
+        public Guid InitInversion(FileUploadMessage request, Guid ownerID)
         {
-            return true;
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool StartInversion(Guid ownerID, Guid inversionID)
@@ -55,12 +55,5 @@ namespace Slb.InversionOptimization.RobotWcfService
         {
             throw new NotImplementedException();
         }
-
-
-        public IInversion CreateInversion(Guid ownerID, string accessCode, Settings settings)
-        {
-            return new Inversion(ownerID, accessCode, settings);
-        }
-
     }
 }

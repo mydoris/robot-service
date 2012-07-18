@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.ServiceModel;
 
 namespace Slb.InversionOptimization.RobotWcfService
@@ -15,9 +14,9 @@ namespace Slb.InversionOptimization.RobotWcfService
         /// <param name="wellID"></param>
         /// <param name="OwnerID"></param>
         /// <param name="settings"></param>
-        /// <returns></returns>
+        /// <returns>inversionID</returns>
         [OperationContract]
-        bool InitInversion(Guid wellID, Guid inversionID, Guid ownerID);
+        Guid InitInversion(FileUploadMessage request, Guid ownerID);
 
         /// <summary>
         /// Start an inversion
@@ -60,21 +59,4 @@ namespace Slb.InversionOptimization.RobotWcfService
         void UploadFile(FileUploadMessage request);
 
     }
-
-
-    [MessageContract]
-    public class FileUploadMessage
-    {
-        [MessageHeader(MustUnderstand = true)]
-        public string SavePath;
-
-        [MessageHeader(MustUnderstand = true)]
-        public string FileName;
-
-        [MessageBodyMember(Order = 1)]
-        public Stream FileData;
-
-    }
-
-
 }

@@ -6,34 +6,41 @@ namespace Slb.InversionOptimization.RobotWcfService
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "RobotService" in code, svc and config file together.
     public class RobotService : IRobotService
     {
-        public void UploadFile(FileUploadMessage request)
+        private Robot robot;
+
+        public RobotService()
         {
-            throw new NotImplementedException();
+            robot = new Robot();
         }
 
-        public bool InitInversion(Guid wellID, Guid inversionID, Guid ownerID)
+        public Guid InitInversion(FileUploadMessage request, Guid ownerID)
         {
-            throw new NotImplementedException();
+            return robot.InitInversion(request, ownerID);
         }
 
         public bool StartInversion(Guid ownerID, Guid inversionID)
         {
-            throw new NotImplementedException();
+            return robot.StartInversion(ownerID, inversionID);
         }
 
         public bool StopInversion(Guid ownerID, Guid inversionID)
         {
-            throw new NotImplementedException();
+            return robot.StopInversion(ownerID, inversionID);
         }
 
         public IDictionary<Guid, IInversion> QueryInversion(Guid wellID)
         {
-            throw new NotImplementedException();
+            return robot.QueryInversion(wellID);
         }
 
         public bool RetrieveInversion(Guid inversionID, string accessCode)
         {
-            throw new NotImplementedException();
+            return robot.RetrieveInversion(inversionID, accessCode);
+        }
+
+        public void UploadFile(FileUploadMessage request)
+        {
+            robot.UploadFile(request);
         }
     }
 }
