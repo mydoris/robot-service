@@ -10,7 +10,7 @@ namespace Slb.InversionOptimization.RobotWcfService
         Guid InversionId { get; }
         string Name { get; }
         bool CheckAccessCode(string accessCode);
-        DirectoryInfo ConfigurateSettings();
+        DirectoryInfo ConfigurateSettings(Settings settingsRequest);
         void GetDataFromInterAct();
     }
 }

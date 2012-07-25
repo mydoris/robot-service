@@ -10,9 +10,9 @@ namespace Slb.InversionOptimization.RobotWcfService
     {
         private string _fileName;
         private Guid _inversionId;
-        private byte[] _bha;
-        private byte[] _setup;
-        private byte[] _connections;
+        private Stream _bha;
+        private Stream _setup;
+        private Stream _connections;
 
         [DataMember]
         public string FileName
@@ -29,21 +29,21 @@ namespace Slb.InversionOptimization.RobotWcfService
         }
 
         [DataMember]
-        public byte[] Bha
+        public Stream Bha
         {
             get { return _bha; }
             set { _bha = value; }
         }
 
         [DataMember]
-        public byte[] Setup
+        public Stream Setup
         {
             get { return _setup; }
             set { _setup = value; }
         }
 
         [DataMember]
-        public byte[] Connections
+        public Stream Connections
         {
             get { return _connections; }
             set { _connections = value; }

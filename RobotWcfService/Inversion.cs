@@ -58,7 +58,6 @@ namespace Slb.InversionOptimization.RobotWcfService
             _accessCode = Guid.NewGuid().ToString();
             _inversionId = Guid.NewGuid();
             _name = ownerId.ToString() + _inversionId.ToString();
-
         }
 
         public bool CheckAccessCode(string accessCode)
@@ -74,20 +73,54 @@ namespace Slb.InversionOptimization.RobotWcfService
             throw new NotImplementedException();
         }
 
-        public DirectoryInfo ConfigurateSettings()
+        public DirectoryInfo ConfigurateSettings(Settings settingsRequest)
         {
             GetBHA();
             GetChannels();
             GetSetup();
-            SaveFiles();
+            SaveFiles(null);
 
             return Input;
-
         }
 
-        private void SaveFiles()
+        private void SaveFiles(Settings settingsRequest)
         {
-            throw new NotImplementedException();
+            string uploadFolder = @"C:\Robot\";
+
+            string dateString = DateTime.Now.ToShortDateString() + @"\";
+            string fileName = _settingsRequest.FileName;
+            string inversionId = _inversionId.ToString();
+            Stream sourceStream = _settingsRequest.Bha;
+            FileStream targetStream = null;
+
+            if (sourceStream == null) throw new ArgumentNullException("sourceStream can't be read.");
+
+            uploadFolder = uploadFolder + dateString;
+            if (!Directory.Exists(uploadFolder))
+            {
+                Directory.CreateDirectory(uploadFolder);
+            }
+
+            string filePath = Path.Combine(uploadFolder, inversionId);
+
+            using (targetStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                //read from the input stream in 4K chunks
+                //and save to output stream
+                const int bufferLen = 4096;
+                byte[] buffer = new byte[bufferLen];
+                int count = 0;
+                while ((count = sourceStream.Read(buffer, 0, bufferLen)) > 0)
+                {
+                    targetStream.Write(buffer, 0, count);
+                }
+                targetStream.Close();
+                sourceStream.Close();
+            }
+
+
+
+
         }
 
         private void GetChannels()
