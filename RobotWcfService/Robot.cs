@@ -20,7 +20,7 @@ namespace Slb.InversionOptimization.RobotWcfService
         }
 
 
-        public Guid InitInversion(FileUploadMessage request, Guid ownerId)
+        public Guid InitInversion(Settings settingsRequest, Guid ownerId)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +35,8 @@ namespace Slb.InversionOptimization.RobotWcfService
             throw new NotImplementedException();
         }
 
-        public IDictionary<Guid, IInversion> QueryInversion(Guid wellId)
+
+        public List<Inversion> QueryInversion(Guid wellId)
         {
             throw new NotImplementedException();
         }
@@ -46,6 +47,11 @@ namespace Slb.InversionOptimization.RobotWcfService
         }
 
         public void UploadFile(FileUploadMessage request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UploadFile(Settings request)
         {
             throw new NotImplementedException();
         }

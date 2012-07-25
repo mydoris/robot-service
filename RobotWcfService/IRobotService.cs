@@ -9,14 +9,14 @@ namespace Slb.InversionOptimization.RobotWcfService
     public interface IRobotService
     {
         /// <summary>
-        /// Initialize inversion, send settings to Robot
+        /// Initialize inversion, send settings to RobotService (Upload 3 files to RobotService)
         /// </summary>
         /// <param name="wellID"></param>
         /// <param name="OwnerID"></param>
         /// <param name="settings"></param>
         /// <returns>inversionID</returns>
         [OperationContract]
-        Guid InitInversion(FileUploadMessage request, Guid ownerId);
+        Guid InitInversion(Settings settingsRequest, Guid ownerId);
 
         /// <summary>
         /// Start an inversion
@@ -38,9 +38,9 @@ namespace Slb.InversionOptimization.RobotWcfService
         /// Query and get all inversions for a well
         /// </summary>
         /// <param name="wellId"></param>
-        /// <returns>Dictionary with OwnerID, Inversion pair</returns>
+        /// <returns>Dictionary with OwnerID, Inversion pair</returns> 
         [OperationContract]
-        IDictionary<Guid, IInversion> QueryInversion(Guid wellId);
+        List<Inversion> QueryInversion(Guid wellId);
 
         /// <summary>
         /// Retrieve an inversion result which includes both Input and Output files
@@ -50,13 +50,6 @@ namespace Slb.InversionOptimization.RobotWcfService
         /// <returns></returns>
         [OperationContract]
         bool RetrieveInversion(Guid inversionId, string accessCode);
-
-        /// <summary>
-        /// Upload 3 files to RobotService
-        /// </summary>
-        /// <param name="request"></param>
-        [OperationContract(Action = "UploadFile", IsOneWay = true)]
-        void UploadFile(FileUploadMessage request);
 
     }
 }
