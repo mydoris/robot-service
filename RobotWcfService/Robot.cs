@@ -5,14 +5,15 @@ namespace Slb.InversionOptimization.RobotWcfService
 {
     public class Robot : IRobot
     {
-        public IInversion Inversion { get; set; }
-
         //owner inversion Map
         IDictionary<Guid, IInversion> _ownerInversionLookup = new Dictionary<Guid, IInversion>();
+
         //accessCode inversion Map
         IDictionary<string, IInversion> _accessInversionLookup = new Dictionary<string, IInversion>();
+
         //inversionID userID Map
         IDictionary<Guid, Guid> _inversionUserLookup = new Dictionary<Guid, Guid>();
+
 
         private List<byte[]> GetFileData(Guid inversionId, string accessCode)
         {
@@ -22,7 +23,9 @@ namespace Slb.InversionOptimization.RobotWcfService
 
         public Guid InitInversion(Settings settingsRequest, Guid ownerId)
         {
-            throw new NotImplementedException();
+            IInversion inversion = InversionFactory.CreateInversion( settingsRequest, ownerId);
+            return inversion.InversionId;
+
         }
 
         public bool StartInversion(Guid ownerId, Guid inversionId)

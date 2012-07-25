@@ -13,9 +13,9 @@ namespace Slb.InversionOptimization.RobotWcfService
             return inversion;
         }
 
-        public static IInversion CreateInversion(Guid ownerId, string accessCode, Settings settings)
+        public static IInversion CreateInversion(Settings settings, Guid ownerId)
         {
-            IInversion inversion = new Inversion(ownerId, accessCode, settings);
+            IInversion inversion = new Inversion(ownerId, settings);
             return inversion;
         }
 
