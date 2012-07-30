@@ -5,6 +5,8 @@ namespace Slb.InversionOptimization.RobotWcfService
 {
     public class Inversion : IInversion
     {
+        private SchedulerAdapter _scAdpt;
+
         private Settings _settingsRequest;
         private Guid _ownerId;
         private Guid _inversionId;
@@ -64,8 +66,7 @@ namespace Slb.InversionOptimization.RobotWcfService
         {
             if (_accessCode == accessCode)
                 return true;
-            else
-                return false;
+            return false;
         }
 
         public void GetDataFromInterAct()
@@ -73,7 +74,24 @@ namespace Slb.InversionOptimization.RobotWcfService
             throw new NotImplementedException();
         }
 
-        public DirectoryInfo ConfigurateSettings(Settings settingsRequest)
+        public void Start()
+        {
+            _input = ConfigurateSettings(_settingsRequest);
+            GetDataFromInterAct();
+            _scAdpt.Send(_input);
+        }
+
+        public bool Stop()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Retrieve()
+        {
+            throw new NotImplementedException();
+        }
+
+        private DirectoryInfo ConfigurateSettings(Settings settingsRequest)
         {
             GetBHA();
             GetChannels();
@@ -81,6 +99,11 @@ namespace Slb.InversionOptimization.RobotWcfService
             SaveFiles(null);
 
             return Input;
+        }
+
+        private void GetFiles()
+        {
+            
         }
 
         private void SaveFiles(Settings settingsRequest)
@@ -117,9 +140,6 @@ namespace Slb.InversionOptimization.RobotWcfService
                 targetStream.Close();
                 sourceStream.Close();
             }
-
-
-
 
         }
 

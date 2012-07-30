@@ -15,27 +15,38 @@ namespace Slb.InversionOptimization.RobotWcfService
         IDictionary<Guid, Guid> _inversionUserLookup = new Dictionary<Guid, Guid>();
 
 
-        private List<byte[]> GetFileData(Guid inversionId, string accessCode)
-        {
-            throw new NotImplementedException();
-        }
+        //private List<byte[]> GetFileData(Guid inversionId, string accessCode)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 
         public Guid InitInversion(Settings settingsRequest, Guid ownerId)
         {
             IInversion inversion = InversionFactory.CreateInversion( settingsRequest, ownerId);
+            _ownerInversionLookup.Add(ownerId, inversion);
+            
             return inversion.InversionId;
 
         }
 
         public bool StartInversion(Guid ownerId, Guid inversionId)
         {
-            throw new NotImplementedException();
+            IInversion inversion;
+            if (_ownerInversionLookup.TryGetValue(ownerId, out inversion))
+            {
+                inversion.Start();
+                return true;
+            }
+            return false;
         }
 
         public bool StopInversion(Guid ownerId, Guid inversionId)
         {
-            throw new NotImplementedException();
+            IInversion inversion;
+            if (_ownerInversionLookup.TryGetValue(ownerId, out inversion))
+                return inversion.Stop();
+            return false;
         }
 
 
@@ -46,17 +57,17 @@ namespace Slb.InversionOptimization.RobotWcfService
 
         public bool RetrieveInversion(Guid inversionId, string accessCode)
         {
-            throw new NotImplementedException();
+            IInversion inversion;
+            if (_accessInversionLookup.TryGetValue(accessCode, out inversion))
+                return inversion.Retrieve();
+            return false;
         }
 
-        public void UploadFile(FileUploadMessage request)
-        {
-            throw new NotImplementedException();
-        }
+        //public void UploadFile(FileUploadMessage request)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void UploadFile(Settings request)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

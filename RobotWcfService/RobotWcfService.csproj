@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="IRobotService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchedulerAdapter.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
