@@ -83,11 +83,13 @@ namespace Slb.InversionOptimization.RobotWcfService
 
         public bool Stop()
         {
+            return _scAdpt.Stop();
             throw new NotImplementedException();
         }
 
         public bool Retrieve()
         {
+            GetFiles();
             throw new NotImplementedException();
         }
 

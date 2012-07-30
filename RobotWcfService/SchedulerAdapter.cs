@@ -12,5 +12,10 @@ namespace Slb.InversionOptimization.RobotWcfService
         {
             throw new NotImplementedException();
         }
+
+        internal bool Stop()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
