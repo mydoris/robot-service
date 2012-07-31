@@ -29,7 +29,7 @@ namespace Slb.InversionOptimization.RobotWcfService
             return robot.StopInversion(ownerId, inversionId);
         }
 
-        public List<Inversion> QueryInversion(Guid wellId)
+        public List<IInversion> QueryInversion(Guid wellId)
         {
             return robot.QueryInversion(wellId);
         }
@@ -37,6 +37,12 @@ namespace Slb.InversionOptimization.RobotWcfService
         public bool RetrieveInversion(Guid inversionId, string accessCode)
         {
             return robot.RetrieveInversion(inversionId, accessCode);
+        }
+
+        private Guid GetWellId()
+        {
+            Guid wellId;
+            return wellId = Guid.NewGuid();
         }
 
     }

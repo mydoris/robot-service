@@ -34,7 +34,7 @@ namespace Slb.InversionOptimization.RobotWcfService
         /// </summary>
         /// <param name="wellId"></param>
         /// <returns>Dictionary with OwnerID, Inversion pair</returns>
-        List<Inversion> QueryInversion(Guid wellId);
+        List<IInversion> QueryInversion(Guid wellId);
 
         /// <summary>
         /// Retrieve an inversion result which includes both Input and Output files

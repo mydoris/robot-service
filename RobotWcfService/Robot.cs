@@ -50,9 +50,20 @@ namespace Slb.InversionOptimization.RobotWcfService
         }
 
 
-        public List<Inversion> QueryInversion(Guid wellId)
+        public List<IInversion> QueryInversion(Guid wellId)
         {
-            throw new NotImplementedException();
+
+            List<IInversion> inversionList = new List<IInversion>();
+
+            foreach (KeyValuePair<Guid, IInversion> pair in _ownerInversionLookup)
+            {
+                if (pair.Value.WellId.Equals(wellId))
+                {
+                    inversionList.Add(pair.Value);
+                }
+            }
+            return inversionList;
+            
         }
 
         public bool RetrieveInversion(Guid inversionId, string accessCode)

@@ -10,6 +10,10 @@ namespace Slb.InversionOptimization.RobotWcfService
     {
         private string _fileName;
         private Guid _inversionId;
+        //
+        private Guid _wellId;
+
+
         private Stream _bha;
         private Stream _setup;
         private Stream _connections;

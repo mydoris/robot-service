@@ -7,6 +7,7 @@ namespace Slb.InversionOptimization.RobotWcfService
     {
         private SchedulerAdapter _scAdpt;
 
+        private Guid _wellId ;
         private Settings _settingsRequest;
         private Guid _ownerId;
         private Guid _inversionId;
@@ -50,6 +51,12 @@ namespace Slb.InversionOptimization.RobotWcfService
             set { _output = value; }
         }
 
+        public Guid WellId
+        {
+            get { return _wellId; }
+            set { _wellId = value; }
+        }
+
 
         public Inversion(){}
 
@@ -59,6 +66,9 @@ namespace Slb.InversionOptimization.RobotWcfService
             _settingsRequest = settingsRequest;
             _accessCode = Guid.NewGuid().ToString();
             _inversionId = Guid.NewGuid();
+            
+            //Todo  how to get wellId from settings
+            WellId = Guid.NewGuid();
             _name = ownerId.ToString() + _inversionId.ToString();
         }
 
