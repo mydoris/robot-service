@@ -5,14 +5,20 @@ namespace Slb.InversionOptimization.RobotWcfService
 {
     public class Robot : IRobot
     {
+
+        private IList<IInversion> _inversions;
+
         //owner inversion Map
-        IDictionary<Guid, IInversion> _ownerInversionLookup = new Dictionary<Guid, IInversion>();
+        private IDictionary<Guid, IInversion> _ownerInversionLookup = new Dictionary<Guid, IInversion>();
 
         //accessCode inversion Map
-        IDictionary<string, IInversion> _accessInversionLookup = new Dictionary<string, IInversion>();
+        // Do I need this?
+        // not good, robot should know nothing about accessCode
+        private IDictionary<string, IInversion> _accessInversionLookup = new Dictionary<string, IInversion>();
 
         //inversionID userID Map
-        IDictionary<Guid, Guid> _inversionUserLookup = new Dictionary<Guid, Guid>();
+        // when retrieve Inversion, user sends his Id and accessCode and InversionId??
+        private IDictionary<Guid, Guid> _inversionUserLookup = new Dictionary<Guid, Guid>();
 
 
         //private List<byte[]> GetFileData(Guid inversionId, string accessCode)

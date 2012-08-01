@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 
 namespace Slb.InversionOptimization.RobotWcfService
@@ -6,6 +7,8 @@ namespace Slb.InversionOptimization.RobotWcfService
     public class Inversion : IInversion
     {
         private SchedulerAdapter _scAdpt;
+
+        private BackgroundWorker _backgroundworker1;
 
         private Guid _wellId ;
         private Settings _settingsRequest;
@@ -62,6 +65,10 @@ namespace Slb.InversionOptimization.RobotWcfService
 
         public Inversion(Guid ownerId, Settings settingsRequest)
         {
+            _backgroundworker1 = new BackgroundWorker();
+            _backgroundworker1.DoWork += new DoWorkEventHandler(_backgroundworker1_DoWork);
+            _backgroundworker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_backgroundworker1_RunWorkerCompleted);
+
             _ownerId = ownerId;
             _settingsRequest = settingsRequest;
             _accessCode = Guid.NewGuid().ToString();
@@ -70,6 +77,34 @@ namespace Slb.InversionOptimization.RobotWcfService
             //Todo  how to get wellId from settings
             WellId = Guid.NewGuid();
             _name = ownerId.ToString() + _inversionId.ToString();
+        }
+
+
+        void _backgroundworker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //Occurs when the background operation has completed, has been canceled, or has raised an exception.
+
+            throw new NotImplementedException();
+        }
+
+        void _backgroundworker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //get data from InterACT &  call the cluster
+
+
+            // Do not access the form's BackgroundWorker reference directly.
+            // Instead, use the reference provided by the sender parameter.
+           // BackgroundWorker bw = sender as BackgroundWorker;
+
+
+
+
+
+
+
+
+
+            throw new NotImplementedException();
         }
 
         public bool CheckAccessCode(string accessCode)
@@ -86,6 +121,10 @@ namespace Slb.InversionOptimization.RobotWcfService
 
         public void Start()
         {
+            // ##################################
+            // Start the download operation in the background.
+            this._backgroundworker1.RunWorkerAsync();
+
             _input = ConfigurateSettings(_settingsRequest);
             GetDataFromInterAct();
             _scAdpt.Send(_input);
@@ -93,6 +132,11 @@ namespace Slb.InversionOptimization.RobotWcfService
 
         public bool Stop()
         {
+            // ##################################
+
+            // Cancel the asynchronous operation.
+            _backgroundworker1.CancelAsync();
+
             return _scAdpt.Stop();
             throw new NotImplementedException();
         }
