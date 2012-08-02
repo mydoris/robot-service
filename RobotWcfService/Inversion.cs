@@ -13,9 +13,11 @@ namespace Slb.InversionOptimization.RobotWcfService
         private readonly string _accessCode;
         private Guid _wellId;
         
+        // Adapter for cluster
         private SchedulerAdapter _schedulerAdpt;
 
         private BackgroundWorker _backgroundworker1;
+        private BackgroundWorker _backgroundWorker2;
 
         private DirectoryInfo _input;
         private DirectoryInfo _output;
@@ -116,7 +118,8 @@ namespace Slb.InversionOptimization.RobotWcfService
         public bool Start()
         {
             // ##################################
-            // Start the download operation in the background.
+            // Start the download operation in the background
+            // Send the downloaded files to cluseter through SchedulerAdapter
             _backgroundworker1.RunWorkerAsync();
 
             _input = ConfigurateSettings(_settings);
@@ -129,7 +132,6 @@ namespace Slb.InversionOptimization.RobotWcfService
         public bool Stop()
         {
             // ##################################
-
             // Cancel the asynchronous operation.
             _backgroundworker1.CancelAsync();
 
