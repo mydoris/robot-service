@@ -8,11 +8,9 @@ namespace Slb.InversionOptimization.RobotWcfService
     [DataContract]
     public class Settings
     {
+        //This could be inversion name
         private string _fileName;
         private Guid _inversionId;
-        //
-        private Guid _wellId;
-
 
         private Stream _bha;
         private Stream _setup;

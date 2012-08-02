@@ -15,6 +15,7 @@ namespace Slb.InversionOptimization.RobotWcfService
         
         // Adapter for cluster
         private SchedulerAdapter _schedulerAdpt;
+        private InterActAdapter _interActAdpt;
 
         private BackgroundWorker _backgroundworker1;
         private BackgroundWorker _backgroundWorker2;
@@ -64,12 +65,33 @@ namespace Slb.InversionOptimization.RobotWcfService
             _accessCode = Guid.NewGuid().ToString();
             _wellId = GetWellId(_settings);
 
+            _schedulerAdpt = new SchedulerAdapter();
+            _interActAdpt = new InterActAdapter();
+
+
             _backgroundworker1 = new BackgroundWorker();
             _backgroundworker1.DoWork += new DoWorkEventHandler(_backgroundworker1_DoWork);
             _backgroundworker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_backgroundworker1_RunWorkerCompleted);
 
+            _backgroundWorker2 = new BackgroundWorker();
+            _backgroundWorker2.DoWork += new DoWorkEventHandler(_backgroundWorker2_DoWork);
+            _backgroundWorker2.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_backgroundworker2_RunWorkerCompleted);
+                
+
         }
 
+        void _backgroundworker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //get data from InterACT 
+            _interActAdpt.GetData();
+
+        }
+
+        private void _backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // call the cluster
+            _schedulerAdpt.RunOnCluster();
+        }
 
         void _backgroundworker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -78,18 +100,11 @@ namespace Slb.InversionOptimization.RobotWcfService
             throw new NotImplementedException();
         }
 
-        void _backgroundworker1_DoWork(object sender, DoWorkEventArgs e)
+        private void _backgroundworker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //get data from InterACT &  call the cluster
-
-
-            // Do not access the form's BackgroundWorker reference directly.
-            // Instead, use the reference provided by the sender parameter.
-           // BackgroundWorker bw = sender as BackgroundWorker;
-
-
             throw new NotImplementedException();
         }
+
 
         public bool CheckAccessCode(string accessCode)
         {
@@ -121,10 +136,7 @@ namespace Slb.InversionOptimization.RobotWcfService
             // Start the download operation in the background
             // Send the downloaded files to cluseter through SchedulerAdapter
             _backgroundworker1.RunWorkerAsync();
-
-            _input = ConfigurateSettings(_settings);
-            GetDataFromInterAct();
-            _schedulerAdpt.Send(_input);
+            _backgroundWorker2.RunWorkerAsync();
 
             return true;
         }
@@ -134,39 +146,36 @@ namespace Slb.InversionOptimization.RobotWcfService
             // ##################################
             // Cancel the asynchronous operation.
             _backgroundworker1.CancelAsync();
+            _backgroundWorker2.CancelAsync();
 
-            return _schedulerAdpt.Stop();
-            throw new NotImplementedException();
+
+            return true;
         }
 
         public bool Retrieve()
         {
             GetFiles();
-            throw new NotImplementedException();
+            return true;
         }
 
-        private DirectoryInfo ConfigurateSettings(Settings settingsRequest)
-        {
-            GetBHA();
-            GetChannels();
-            GetSetup();
-            SaveFiles(null);
 
-            return _input;
-        }
 
         private void GetFiles()
         {
             
         }
 
-        private void SaveFiles(Settings settingsRequest)
+        private void SaveFiles(Settings settings)
         {
+            if (settings == null) throw new ArgumentNullException("settings");
+
             string uploadFolder = @"C:\Robot\";
 
             string dateString = DateTime.Now.ToShortDateString() + @"\";
+            
+            //this could be inversion's name
             string fileName = _settings.FileName;
-            string inversionId = InversionId.ToString();
+            string inversionId = _inversionId.ToString();
             Stream sourceStream = _settings.Bha;
             FileStream targetStream = null;
 
@@ -197,6 +206,15 @@ namespace Slb.InversionOptimization.RobotWcfService
 
         }
 
+        private DirectoryInfo ConfigurateSettings(Settings settingsRequest)
+        {
+            GetBHA();
+            GetChannels();
+            GetSetup();
+            SaveFiles(null);
+
+            return _input;
+        }
 
         /// <summary>
         /// Get wellId from Settings
@@ -225,7 +243,5 @@ namespace Slb.InversionOptimization.RobotWcfService
             throw new NotImplementedException();
         }
 
-        
     }
-
 }

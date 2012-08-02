@@ -17,5 +17,10 @@ namespace Slb.InversionOptimization.RobotWcfService
         {
             throw new NotImplementedException();
         }
+
+        public void RunOnCluster()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
