@@ -96,7 +96,6 @@ namespace Slb.InversionOptimization.RobotWcfService
         void _backgroundworker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //Occurs when the background operation has completed, has been canceled, or has raised an exception.
-
             throw new NotImplementedException();
         }
 
@@ -114,7 +113,7 @@ namespace Slb.InversionOptimization.RobotWcfService
         }
 
         /// <summary>
-        /// Owner gets accessCode
+        /// Owner use this method to get his accessCode
         /// </summary>
         /// <param name="ownerId"></param>
         /// <returns></returns>
@@ -125,17 +124,13 @@ namespace Slb.InversionOptimization.RobotWcfService
             return null;
         }
 
-        public void GetDataFromInterAct()
-        {
-            throw new NotImplementedException();
-        }
 
         public bool Start()
         {
             // ##################################
             // Start the download operation in the background
-            // Send the downloaded files to cluseter through SchedulerAdapter
             _backgroundworker1.RunWorkerAsync();
+            // Send the downloaded files to cluseter through SchedulerAdapter
             _backgroundWorker2.RunWorkerAsync();
 
             return true;
@@ -152,15 +147,19 @@ namespace Slb.InversionOptimization.RobotWcfService
             return true;
         }
 
+        /// <summary>
+        /// Get existing ouput file on the Directory
+        /// </summary>
+        /// <returns></returns>
         public bool Retrieve()
         {
-            GetFiles();
+            GetFiles(_output);
             return true;
         }
 
 
 
-        private void GetFiles()
+        private void GetFiles(DirectoryInfo output)
         {
             
         }
@@ -211,7 +210,7 @@ namespace Slb.InversionOptimization.RobotWcfService
             GetBHA();
             GetChannels();
             GetSetup();
-            SaveFiles(null);
+            SaveFiles(_settings);
 
             return _input;
         }
