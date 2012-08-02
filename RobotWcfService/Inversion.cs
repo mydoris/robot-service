@@ -6,11 +6,12 @@ namespace Slb.InversionOptimization.RobotWcfService
 {
     public class Inversion : IInversion
     {
-        private string _name;
         private Guid _inversionId;
-        private string _accessCode;
-        private Guid _wellId;
+        private string _name;
         private Guid _ownerId;
+        private Settings _settings;
+        private readonly string _accessCode;
+        private Guid _wellId;
         
         private SchedulerAdapter _schedulerAdpt;
 
@@ -18,25 +19,53 @@ namespace Slb.InversionOptimization.RobotWcfService
 
         private DirectoryInfo _input;
         private DirectoryInfo _output;
-        private Settings _settings;
+
+        public Guid InversionId
+        {
+            get { return _inversionId; }
+            set { _inversionId = value; }
+        }
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+
+        public Guid OwnerId
+        {
+            get { return _ownerId; }
+            set { _ownerId = value; }
+        }
+
+        public Guid WellId
+        {
+            get { return _wellId; }
+            set { _wellId = value; }
+        }
 
 
         public Inversion(){}
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="ownerId"></param>
+        /// <param name="settings"></param>
         public Inversion(Guid ownerId, Settings settings)
         {
+            _inversionId = Guid.NewGuid();
+            // TODO  how to define the name ???
+            _name = ownerId.ToString() + InversionId.ToString();
+            _ownerId = ownerId;
+            _settings = settings;
+            // TODO how to generate the accessCode
+            _accessCode = Guid.NewGuid().ToString();
+            _wellId = GetWellId(_settings);
+
             _backgroundworker1 = new BackgroundWorker();
             _backgroundworker1.DoWork += new DoWorkEventHandler(_backgroundworker1_DoWork);
             _backgroundworker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_backgroundworker1_RunWorkerCompleted);
 
-            _ownerId = ownerId;
-            _settings = settings;
-            _accessCode = Guid.NewGuid().ToString();
-            _inversionId = Guid.NewGuid();
-            
-            //Todo  how to get wellId from settings
-            WellId = Guid.NewGuid();
-            _name = ownerId.ToString() + _inversionId.ToString();
         }
 
 
@@ -67,6 +96,18 @@ namespace Slb.InversionOptimization.RobotWcfService
             return false;
         }
 
+        /// <summary>
+        /// Owner gets accessCode
+        /// </summary>
+        /// <param name="ownerId"></param>
+        /// <returns></returns>
+        public string GetAccessCode(Guid ownerId)
+        {
+            if (_ownerId == ownerId)
+                return _accessCode;
+            return null;
+        }
+
         public void GetDataFromInterAct()
         {
             throw new NotImplementedException();
@@ -76,7 +117,7 @@ namespace Slb.InversionOptimization.RobotWcfService
         {
             // ##################################
             // Start the download operation in the background.
-            this._backgroundworker1.RunWorkerAsync();
+            _backgroundworker1.RunWorkerAsync();
 
             _input = ConfigurateSettings(_settings);
             GetDataFromInterAct();
@@ -123,7 +164,7 @@ namespace Slb.InversionOptimization.RobotWcfService
 
             string dateString = DateTime.Now.ToShortDateString() + @"\";
             string fileName = _settings.FileName;
-            string inversionId = _inversionId.ToString();
+            string inversionId = InversionId.ToString();
             Stream sourceStream = _settings.Bha;
             FileStream targetStream = null;
 
@@ -154,6 +195,19 @@ namespace Slb.InversionOptimization.RobotWcfService
 
         }
 
+
+        /// <summary>
+        /// Get wellId from Settings
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <returns></returns>
+        private Guid GetWellId(Settings settings)
+        {
+
+            //TODO how to get wellId ?????????  from InterAct ??????
+            return Guid.NewGuid();
+        }
+
         private void GetChannels()
         {
             throw new NotImplementedException();
@@ -169,48 +223,7 @@ namespace Slb.InversionOptimization.RobotWcfService
             throw new NotImplementedException();
         }
 
-
-
-        public Guid OwnerId
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public Guid InversionId
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string Name
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public Guid WellId
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        
     }
 
 }
