@@ -5,16 +5,14 @@ namespace Slb.InversionOptimization.RobotWcfService
 {
     public interface IInversion
     {
-        Guid OwnerId { get; }
-        Settings SettingsRequest { get; set; }
-        Guid InversionId { get; }
+        Guid OwnerId { get; set; }
+        Guid InversionId { get; set; }
+
         string Name { get; }
         Guid WellId { get; set; }
         bool CheckAccessCode(string accessCode);
-        //DirectoryInfo ConfigurateSettings(Settings settingsRequest);
-        void GetDataFromInterAct();
-        void Start();
+        bool Start();
         bool Stop();
-        bool Retrieve();
+
     }
 }

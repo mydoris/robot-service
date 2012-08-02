@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Slb.InversionOptimization.RobotWcfService
@@ -7,42 +8,37 @@ namespace Slb.InversionOptimization.RobotWcfService
     public class RobotService : IRobotService
     {
         
-        private IRobot robot;
+        private readonly IRobot _robot;
 
         public RobotService()
         {
-            robot = new Robot();
+            _robot = new Robot();
         }
 
-        public Guid InitInversion(Settings request, Guid ownerId)
+
+        public Guid InitInversion(Guid ownerId, Settings settings)
         {
-            return robot.InitInversion(request, ownerId);
+            return _robot.InitInversion(ownerId, settings);
         }
 
         public bool StartInversion(Guid ownerId, Guid inversionId)
         {
-            return robot.StartInversion(ownerId, inversionId);
+            return _robot.StartInversion(ownerId, inversionId);
         }
 
         public bool StopInversion(Guid ownerId, Guid inversionId)
         {
-            return robot.StopInversion(ownerId, inversionId);
+            return _robot.StopInversion(ownerId, inversionId);
         }
 
-        public List<IInversion> QueryInversion(Guid wellId)
+        public IList<IInversion> QueryInversion(Guid wellId)
         {
-            return robot.QueryInversion(wellId);
+            return _robot.QueryInversion(wellId);
         }
 
-        public bool RetrieveInversion(Guid inversionId, string accessCode)
+        public IInversion RetrieveInversion(Guid userId, Guid inversionId, string accessCode)
         {
-            return robot.RetrieveInversion(inversionId, accessCode);
-        }
-
-        private Guid GetWellId()
-        {
-            Guid wellId;
-            return wellId = Guid.NewGuid();
+            return _robot.RetrieveInversion(userId, inversionId, accessCode);
         }
 
     }

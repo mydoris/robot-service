@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ServiceModel;
 
@@ -11,16 +12,14 @@ namespace Slb.InversionOptimization.RobotWcfService
         /// <summary>
         /// Initialize inversion, send settings to RobotService (Upload 3 files to RobotService)
         /// </summary>
-        /// <param name="wellID"></param>
-        /// <param name="OwnerID"></param>
-        /// <param name="settings"></param>
         /// <returns>inversionID</returns>
         [OperationContract]
-        Guid InitInversion(Settings settingsRequest, Guid ownerId);
+        Guid InitInversion(Guid ownerId, Settings settings);
 
         /// <summary>
         /// Start an inversion
         /// </summary>
+        /// <param name="ownerId"> </param>
         /// <param name="inversionId"></param>
         /// <returns></returns>
         [OperationContract]
@@ -29,6 +28,7 @@ namespace Slb.InversionOptimization.RobotWcfService
         /// <summary>
         /// Stop  an inversion
         /// </summary>
+        /// <param name="ownerId"> </param>
         /// <param name="inversionId"></param>
         /// <returns></returns>
         [OperationContract]
@@ -40,16 +40,18 @@ namespace Slb.InversionOptimization.RobotWcfService
         /// <param name="wellId"></param>
         /// <returns>Dictionary with OwnerID, Inversion pair</returns> 
         [OperationContract]
-        List<IInversion> QueryInversion(Guid wellId);
+        IList<IInversion> QueryInversion(Guid wellId);
 
         /// <summary>
         /// Retrieve an inversion result which includes both Input and Output files
+        /// return what?
         /// </summary>
+        /// <param name="userId"> </param>
         /// <param name="inversionId"></param>
         /// <param name="accessCode"></param>
         /// <returns></returns>
         [OperationContract]
-        bool RetrieveInversion(Guid inversionId, string accessCode);
+        IInversion RetrieveInversion(Guid userId, Guid inversionId, string accessCode);
 
     }
 }

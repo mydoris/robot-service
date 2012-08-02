@@ -1,36 +1,29 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Slb.InversionOptimization.RobotWcfService
 {
     public class Robot : IRobot
     {
-
         private IList<IInversion> _inversions;
 
-        //owner inversion Map
-        private IDictionary<Guid, IInversion> _ownerInversionLookup = new Dictionary<Guid, IInversion>();
+        //user-inversion Dictionary
+        private IDictionary<Guid, IInversion> _userInversionLookup;
 
-        //accessCode inversion Map
-        // Do I need this?
-        // not good, robot should know nothing about accessCode
-        private IDictionary<string, IInversion> _accessInversionLookup = new Dictionary<string, IInversion>();
-
-        //inversionID userID Map
-        // when retrieve Inversion, user sends his Id and accessCode and InversionId??
-        private IDictionary<Guid, Guid> _inversionUserLookup = new Dictionary<Guid, Guid>();
-
-
-        //private List<byte[]> GetFileData(Guid inversionId, string accessCode)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
-        public Guid InitInversion(Settings settingsRequest, Guid ownerId)
+        public Robot()
         {
-            IInversion inversion = InversionFactory.CreateInversion( settingsRequest, ownerId);
-            _ownerInversionLookup.Add(ownerId, inversion);
+            _inversions = new List<IInversion>();
+            _userInversionLookup = new Dictionary<Guid, IInversion>();
+        }
+
+
+        public Guid InitInversion(Guid ownerId, Settings settings)
+        {
+            var inversion = InversionFactory.CreateInversion( ownerId, settings);
+            _inversions.Add(inversion);
+            _userInversionLookup.Add(ownerId, inversion);
             
             return inversion.InversionId;
 
@@ -38,53 +31,85 @@ namespace Slb.InversionOptimization.RobotWcfService
 
         public bool StartInversion(Guid ownerId, Guid inversionId)
         {
-            IInversion inversion;
-            if (_ownerInversionLookup.TryGetValue(ownerId, out inversion))
+            IInversion inversion = null;
+            foreach (var inv in _inversions.Where(inv => inv.InversionId.Equals(inversionId)))
             {
-                inversion.Start();
-                return true;
+                inversion = inv;
             }
-            return false;
+
+            return inversion != null && inversion.Start();
         }
 
         public bool StopInversion(Guid ownerId, Guid inversionId)
         {
-            IInversion inversion;
-            if (_ownerInversionLookup.TryGetValue(ownerId, out inversion))
-                return inversion.Stop();
-            return false;
+            IInversion inversion = null;
+            foreach (var inv in _inversions)
+            {
+                if (inv.InversionId.Equals(inversionId))
+                {
+                    inversion = inv;
+                }
+            }
+
+            return inversion != null && inversion.Stop();
         }
 
 
-        public List<IInversion> QueryInversion(Guid wellId)
+        public IList<IInversion> QueryInversion(Guid wellId)
         {
+            var inversionQuery = from inversion in _inversions
+                                 where inversion.WellId.Equals(wellId)
+                                 select inversion;
+            var inversionList = inversionQuery.ToList();
 
-            List<IInversion> inversionList = new List<IInversion>();
-
-            foreach (KeyValuePair<Guid, IInversion> pair in _ownerInversionLookup)
-            {
-                if (pair.Value.WellId.Equals(wellId))
-                {
-                    inversionList.Add(pair.Value);
-                }
-            }
             return inversionList;
             
         }
 
-        public bool RetrieveInversion(Guid inversionId, string accessCode)
+        public IInversion RetrieveInversion(Guid userId, Guid inversionId, string accessCode)
         {
-            IInversion inversion;
-            if (_accessInversionLookup.TryGetValue(accessCode, out inversion))
-                return inversion.Retrieve();
-            return false;
+            IInversion inversion = null;
+            var inversionQuery = from inv in _inversions
+                                 where inv.InversionId.Equals(inversionId)
+                                 select inv;
+            foreach (var inv in inversionQuery)
+            {
+                inversion = inv;
+            }
+
+            if (inversion != null && !inversion.CheckAccessCode(accessCode))
+            {
+                return null;
+            }
+
+            // Add user who can access the inversion into user-inversion dictionary
+            _userInversionLookup.Add(userId, inversion);
+
+            return inversion;
         }
 
-        //public void UploadFile(FileUploadMessage request)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        /// <summary>
+        /// Find users by inversionId based on the user-inversion Dictionary
+        /// </summary>
+        /// <param name="inversionId"></param>
+        /// <returns></returns>
+        public IList<Guid> GetUsersByInversionId(Guid inversionId )
+        {
+            var users = new List<Guid>();
+
+            var usersQuery = from user in _userInversionLookup
+                             where user.Value.InversionId.Equals(inversionId)
+                             select user;
+
+            foreach (var keyValuePair in usersQuery)
+            {
+                users.Add(keyValuePair.Key);
+            }
+
+            return users;
+        }
 
 
     }
+
 }

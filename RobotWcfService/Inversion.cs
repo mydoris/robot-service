@@ -6,71 +6,31 @@ namespace Slb.InversionOptimization.RobotWcfService
 {
     public class Inversion : IInversion
     {
-        private SchedulerAdapter _scAdpt;
+        private string _name;
+        private Guid _inversionId;
+        private string _accessCode;
+        private Guid _wellId;
+        private Guid _ownerId;
+        
+        private SchedulerAdapter _schedulerAdpt;
 
         private BackgroundWorker _backgroundworker1;
 
-        private Guid _wellId ;
-        private Settings _settingsRequest;
-        private Guid _ownerId;
-        private Guid _inversionId;
-
-        private string _name;
-        private string _accessCode;
-
         private DirectoryInfo _input;
         private DirectoryInfo _output;
-
-        public string Name
-        {
-            get { return _name; } 
-        }
-
-        public Guid OwnerId
-        {
-            get { return _ownerId; }
-        }
-
-        public Settings SettingsRequest
-        {
-            get { return _settingsRequest; }
-            set { _settingsRequest = value; }
-        }
-
-        public Guid InversionId
-        {
-            get { return _inversionId; }
-        }
-
-        public DirectoryInfo Input
-        {
-            get { return _input; }
-            set { _input = value; }
-        }
-
-        public DirectoryInfo Output
-        {
-            get { return _output; }
-            set { _output = value; }
-        }
-
-        public Guid WellId
-        {
-            get { return _wellId; }
-            set { _wellId = value; }
-        }
+        private Settings _settings;
 
 
         public Inversion(){}
 
-        public Inversion(Guid ownerId, Settings settingsRequest)
+        public Inversion(Guid ownerId, Settings settings)
         {
             _backgroundworker1 = new BackgroundWorker();
             _backgroundworker1.DoWork += new DoWorkEventHandler(_backgroundworker1_DoWork);
             _backgroundworker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_backgroundworker1_RunWorkerCompleted);
 
             _ownerId = ownerId;
-            _settingsRequest = settingsRequest;
+            _settings = settings;
             _accessCode = Guid.NewGuid().ToString();
             _inversionId = Guid.NewGuid();
             
@@ -97,13 +57,6 @@ namespace Slb.InversionOptimization.RobotWcfService
            // BackgroundWorker bw = sender as BackgroundWorker;
 
 
-
-
-
-
-
-
-
             throw new NotImplementedException();
         }
 
@@ -119,15 +72,17 @@ namespace Slb.InversionOptimization.RobotWcfService
             throw new NotImplementedException();
         }
 
-        public void Start()
+        public bool Start()
         {
             // ##################################
             // Start the download operation in the background.
             this._backgroundworker1.RunWorkerAsync();
 
-            _input = ConfigurateSettings(_settingsRequest);
+            _input = ConfigurateSettings(_settings);
             GetDataFromInterAct();
-            _scAdpt.Send(_input);
+            _schedulerAdpt.Send(_input);
+
+            return true;
         }
 
         public bool Stop()
@@ -137,7 +92,7 @@ namespace Slb.InversionOptimization.RobotWcfService
             // Cancel the asynchronous operation.
             _backgroundworker1.CancelAsync();
 
-            return _scAdpt.Stop();
+            return _schedulerAdpt.Stop();
             throw new NotImplementedException();
         }
 
@@ -154,7 +109,7 @@ namespace Slb.InversionOptimization.RobotWcfService
             GetSetup();
             SaveFiles(null);
 
-            return Input;
+            return _input;
         }
 
         private void GetFiles()
@@ -167,9 +122,9 @@ namespace Slb.InversionOptimization.RobotWcfService
             string uploadFolder = @"C:\Robot\";
 
             string dateString = DateTime.Now.ToShortDateString() + @"\";
-            string fileName = _settingsRequest.FileName;
+            string fileName = _settings.FileName;
             string inversionId = _inversionId.ToString();
-            Stream sourceStream = _settingsRequest.Bha;
+            Stream sourceStream = _settings.Bha;
             FileStream targetStream = null;
 
             if (sourceStream == null) throw new ArgumentNullException("sourceStream can't be read.");
@@ -215,6 +170,47 @@ namespace Slb.InversionOptimization.RobotWcfService
         }
 
 
+
+        public Guid OwnerId
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public Guid InversionId
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string Name
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public Guid WellId
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 
 }
