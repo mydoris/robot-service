@@ -127,6 +127,12 @@ namespace Slb.InversionOptimization.RobotWcfService
 
         public bool Start()
         {
+            // Start OC connection, begin to monitor and download channel data
+            // Event will be published, and event handled by method MonitorIncomingData()
+               // StartDataDownloading();
+
+
+
             // ##################################
             // Start the download operation in the background
             _backgroundworker1.RunWorkerAsync();
@@ -136,8 +142,23 @@ namespace Slb.InversionOptimization.RobotWcfService
             return true;
         }
 
+        private void MonitorIncomingData()
+        {
+            // Check whether all the input channels are available for given depth
+            // Given channels are defined in inversion settings including channel name
+            // Given depth is from inversion setting too, [Start, step, stop]
+
+            // If data avaible
+                // GenerateChannelFile(double currentDepth)
+                // LaunchInversion(), result files will be automatically retrieved back
+                // increase current depth
+        }
+
         public bool Stop()
         {
+            // Close OC connection
+            // Clean local memebers for channel cache
+
             // ##################################
             // Cancel the asynchronous operation.
             _backgroundworker1.CancelAsync();
