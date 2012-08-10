@@ -51,8 +51,8 @@ namespace Slb.InversionOptimization.RobotService
         /// </summary>
         /// <param name="wellID"></param>
         /// <returns>Dictionary with OwnerID, Inversion pair</returns>
-        [OperationContract]
-        IDictionary<Guid, IInversion> QueryInversion(Guid wellID);
+        //[OperationContract]
+        //IDictionary<Guid, IInversion> QueryInversion(Guid wellID);
 
         /// <summary>
         /// Retrieve an inversion result which includes both Input and Output files
